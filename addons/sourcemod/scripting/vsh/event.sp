@@ -3,7 +3,6 @@ void Event_Init()
 	HookEvent("teamplay_round_start", Event_RoundStart, EventHookMode_Pre);
 	HookEvent("teamplay_setup_finished", Event_RoundArenaStart);
 	HookEvent("teamplay_round_win", Event_RoundEnd);
-	HookEvent("teamplay_point_captured", Event_PointCaptured);
 	HookEvent("player_spawn", Event_PlayerSpawn);
 	HookEvent("player_death", Event_PlayerDeath, EventHookMode_Pre);
 	HookEvent("post_inventory_application", Event_PlayerInventoryUpdate);
@@ -21,9 +20,6 @@ void Event_Init()
 public Action Event_RoundStart(Event event, const char[] sName, bool bDontBroadcast)
 {
 	if (!g_bEnabled || GameRules_GetProp("m_bInWaitingForPlayers")) return;
-
-	// Start dome stuffs regardless if first round
-	Dome_RoundStart();
 
 	// Play one round of arena
 	if (g_iTotalRoundPlayed <= 0) return;
@@ -110,13 +106,6 @@ public Action Event_RoundStart(Event event, const char[] sName, bool bDontBroadc
 public Action Event_RoundArenaStart(Event event, const char[] sName, bool bDontBroadcast)
 {
 	if (!g_bEnabled || GameRules_GetProp("m_bInWaitingForPlayers")) return;
-
-	//Play one round of arena, and force unlock/enable dome
-	if (g_iTotalRoundPlayed <= 0)
-	{
-		GameRules_SetPropFloat("m_flCapturePointEnableTime", 0.0);
-		return;
-	}
 
 	g_bRoundStarted = true;
 	g_iTotalAttackCount = SaxtonHale_GetAliveAttackPlayers();
@@ -273,9 +262,6 @@ public Action Event_RoundArenaStart(Event event, const char[] sName, bool bDontB
 	for (int i = 1; i <= MaxClients; i++)
 		if (IsClientInGame(i))
 			Hud_Display(i, CHANNEL_INTRO, sMessage, flHUD, 5.0, iColor, 0, 0.0, flFade);
-
-	Dome_RoundArenaStart();
-
 	//Display chat on who is next boss
 	int iNextPlayer = Queue_GetPlayerFromRank(1);
 	if (0 < iNextPlayer <= MaxClients && IsClientInGame(iNextPlayer))
@@ -461,12 +447,6 @@ public Action Event_RoundEnd(Event event, const char[] sName, bool bDontBroadcas
 			Hud_Display(iClient, CHANNEL_INTRO, sBuffer, flHUD, 10.0);
 		}
 	}	
-}
-
-public void Event_PointCaptured(Event event, const char[] sName, bool bDontBroadcast)
-{
-	TFTeam nTeam = view_as<TFTeam>(event.GetInt("team"));
-	Dome_SetTeam(nTeam);
 }
 
 public void Event_BroadcastAudio(Event event, const char[] sName, bool bDontBroadcast)
