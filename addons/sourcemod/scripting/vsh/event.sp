@@ -100,7 +100,6 @@ public Action Event_RoundStart(Event event, const char[] sName, bool bDontBroadc
 
 	Rank_RoundStart();
 
-	RequestFrame(Frame_InitVshPreRoundTimer, tf_arena_preround_time.IntValue);
 }
 
 public Action Event_RoundArenaStart(Event event, const char[] sName, bool bDontBroadcast)
