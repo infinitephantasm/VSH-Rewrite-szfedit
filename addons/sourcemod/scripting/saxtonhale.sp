@@ -732,7 +732,7 @@ public void OnPluginStart()
 	SaxtonHale_RegisterClass("CModifiersVampire", VSHClassType_Modifier);
 	
 	//Init our convars
-	g_ConfigConvar.Create("vsh_force_load", "-1", "Force enable VSH on map start? (-1 for default, 0 for force disable, 1 for force enable)", _, true, -1.0, true, 1.0);
+	g_ConfigConvar.Create("vsh_force_load", "1", "Force enable VSH on map start? (-1 for default, 0 for force disable, 1 for force enable)", _, true, -1.0, true, 1.0);
 	g_ConfigConvar.Create("vsh_boss_ping_limit", "200", "Max ping/latency to allow player to play as boss (-1 for no limit)", _, true, -1.0);
 	g_ConfigConvar.Create("vsh_telefrag_damage", "9001.0", "Damage amount to boss from telefrag", _, true, 0.0);
 	g_ConfigConvar.Create("vsh_music_enable", "1", "Enable boss music?", _, true, 0.0, true, 1.0);
@@ -904,12 +904,6 @@ public void OnMapStart()
 		|| (StrContains(sMapName, "ff2_", false) != -1)
 		|| (StrContains(sMapName, "arena_", false) != -1))
 	{
-		if (FindEntityByClassname(-1, "tf_logic_arena") == -1)
-		{
-			g_bEnabled = false;
-			return;
-		}
-
 		Config_Refresh();
 
 		//Precache every bosses/abilities/modifiers registered
