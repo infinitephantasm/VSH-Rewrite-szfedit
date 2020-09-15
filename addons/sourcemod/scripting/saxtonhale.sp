@@ -73,8 +73,8 @@
 #define TEXT_NEUTRAL		"\x07EEEEEE"
 #define TEXT_ERROR			"\x07FF2F00"
 
-const TFTeam TFTeam_Boss = TFTeam_Blue;
-const TFTeam TFTeam_Attack = TFTeam_Red;
+const TFTeam TFTeam_Boss = TFTeam_Red;
+const TFTeam TFTeam_Attack = TFTeam_Blue;
 
 const TFObjectType TFObject_Invalid = view_as<TFObjectType>(-1);
 const TFObjectMode TFObjectMode_Invalid = view_as<TFObjectMode>(-1);
