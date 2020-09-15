@@ -454,9 +454,9 @@ ConVar tf_arena_preround_time;
 
 public Plugin myinfo =
 {
-	name = "Versus Saxton Hale Rewrite",
-	author = "42, Kenzzer",
-	description = "Popular VSH Gamemode Rewritten from scrach",
+	name = "Versus Saxton Hale Rewrite SZF-compat edit",
+	author = "42, Kenzzer, ruined by infinite phantasm",
+	description = "Popular VSH Gamemode Rewritten from scratch, edited for SZF compat",
 	version = PLUGIN_VERSION ... "." ... PLUGIN_VERSION_REVISION,
 	url = "https://github.com/redsunservers/VSH-Rewrite",
 };
