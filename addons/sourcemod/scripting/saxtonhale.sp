@@ -1033,37 +1033,6 @@ public void OnEntityDestroyed(int iEntity)
 		Network_ResetEntity(iEntity);
 }
 
-void Frame_InitVshPreRoundTimer(int iTime)
-{
-	//Kill the timer created by the game
-	int iGameTimer = -1;
-	while ((iGameTimer = FindEntityByClassname(iGameTimer, "team_round_timer")) > MaxClients)
-	{
-		if (GetEntProp(iGameTimer, Prop_Send, "m_bShowInHUD"))
-		{
-			AcceptEntityInput(iGameTimer, "Kill");
-			break;
-		}
-	}
-
-	//Initiate our timer with our time
-	int iTimer = CreateEntityByName("team_round_timer");
-	DispatchKeyValue(iTimer, "show_in_hud", "1");
-	DispatchSpawn(iTimer);
-
-	SetVariantInt(iTime);
-	AcceptEntityInput(iTimer, "SetTime");
-	AcceptEntityInput(iTimer, "Resume");
-	AcceptEntityInput(iTimer, "Enable");
-	SetEntProp(iTimer, Prop_Send, "m_bAutoCountdown", false);
-
-	GameRules_SetPropFloat("m_flStateTransitionTime", float(iTime)+GetGameTime());
-	CreateTimer(float(iTime), Timer_EntityCleanup, EntIndexToEntRef(iTimer));
-
-	Event event = CreateEvent("teamplay_update_timer");
-	event.Fire();
-}
-
 void Frame_VerifyTeam(int userid)
 {
 	int iClient = GetClientOfUserId(userid);
