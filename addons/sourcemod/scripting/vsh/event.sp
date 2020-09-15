@@ -1,7 +1,7 @@
 void Event_Init()
 {
 	HookEvent("teamplay_round_start", Event_RoundStart, EventHookMode_Pre);
-	HookEvent("arena_round_start", Event_RoundArenaStart);
+	HookEvent("teamplay_setup_finished", Event_RoundArenaStart);
 	HookEvent("teamplay_round_win", Event_RoundEnd);
 	HookEvent("teamplay_point_captured", Event_PointCaptured);
 	HookEvent("player_spawn", Event_PlayerSpawn);
