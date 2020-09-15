@@ -1235,10 +1235,6 @@ public void OnClientDisconnect_Post(int iClient)
 
 public void Client_OnThink(int iClient)
 {
-	if (!g_bEnabled) return;
-	
-	Dome_OnThink(iClient);
-	
 	if (g_iTotalRoundPlayed <= 0) return;
 	
 	SaxtonHaleBase boss = SaxtonHaleBase(iClient);
