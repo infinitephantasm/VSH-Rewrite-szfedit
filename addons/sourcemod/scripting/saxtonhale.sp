@@ -439,7 +439,6 @@ ConVar tf_arena_preround_time;
 #include "vsh/command.sp"
 #include "vsh/console.sp"
 #include "vsh/cookies.sp"
-#include "vsh/dome.sp"
 #include "vsh/event.sp"
 #include "vsh/forward.sp"
 #include "vsh/hud.sp"
@@ -519,7 +518,6 @@ public void OnPluginStart()
 	Command_Init();
 	Console_Init();
 	Cookies_Init();
-	Dome_Init();
 	Event_Init();
 	FuncClass_Init();
 	FuncFunction_Init();
@@ -948,8 +946,6 @@ public void OnMapStart()
 		g_iSpritesLaserbeam = PrecacheModel("materials/sprites/laserbeam.vmt", true);
 		g_iSpritesGlow = PrecacheModel("materials/sprites/glow01.vmt", true);
 		
-		Dome_MapStart();
-		
 		CreateTimer(60.0, Timer_WelcomeMessage);
 		CreateTimer(240.0, Timer_WelcomeMessage, _, TIMER_REPEAT|TIMER_FLAG_NO_MAPCHANGE);
 		
@@ -1013,18 +1009,6 @@ public void OnEntityCreated(int iEntity, const char[] sClassname)
 		|| strcmp(sClassname, "func_regenerate") == 0)
 	{
 		SDKHook(iEntity, SDKHook_Touch, ItemPack_OnTouch);
-	}
-	else if (StrEqual(sClassname, "team_control_point_master"))
-	{
-		SDKHook(iEntity, SDKHook_Spawn, Dome_MasterSpawn);
-	}
-	else if (StrEqual(sClassname, "trigger_capture_area"))
-	{
-		SDKHook(iEntity, SDKHook_Spawn, Dome_TriggerSpawn);
-		
-		SDKHook(iEntity, SDKHook_StartTouch, Dome_TriggerTouch);
-		SDKHook(iEntity, SDKHook_Touch, Dome_TriggerTouch);
-		SDKHook(iEntity, SDKHook_EndTouch, Dome_TriggerTouch);
 	}
 	else if (StrEqual(sClassname, "game_end"))
 	{
