@@ -472,14 +472,7 @@ public Action Event_PlayerSpawn(Event event, const char[] sName, bool bDontBroad
 	int iClient = GetClientOfUserId(event.GetInt("userid"));
 	int iTeam = GetClientTeam(iClient);
 	if (iTeam <= 1) return;
-	
-	if (g_bRoundStarted && SaxtonHale_IsValidAttack(iClient))
-	{
-		//Latespawn... get outa here
-		ForcePlayerSuicide(iClient);
-		return;
-	}
-	
+
 	TFClassType iOldClass = view_as<TFClassType>(event.GetInt("class"));
 	TFClassType iNewClass = ClassLimit_GetNewClass(iClient);
 	
