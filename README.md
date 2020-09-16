@@ -6,6 +6,7 @@ an edit of the rewrite of Versus Saxton Hale created by 42 and several other con
 if it wasn't obvious, this thing sucks. do not actually use this for anything serious.
 
 ## Issues
+- **if a boss has a weapon in their loadout and attempts to pick that same weapon up,** ***the server will crash.*** this is because of how super zombie fortress generates weapons, and how VSH blocks loadout weapons from being generated. not much i can do.
 - the first round will be a normal round of SZF. i didn't really bother changing the code for that out
 - depending on the boss, weapon pickups can and will crash the server
 - maps may function strangely if they do certain things based on map progress (mainly reducing health of players)
